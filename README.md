@@ -14,26 +14,6 @@ Organiza os arquivos de saída em pastas por data de execução
 Agenda execução automática diária no horário configurado
 Registra logs de todas as execuções
 
-
-    Estrutura do projeto
-BOT-PYTHON-PLANILHAS/
-│
-├── main.py           → ponto de entrada e agendador
-├── leitor.py         → leitura e limpeza dos arquivos
-├── processador.py    → análise e processamento dos dados
-├── relatorio.py      → geração do relatório Excel formatado
-├── dashboard.py      → geração do dashboard com gráficos
-├── enviador.py       → (em desenvolvimento)
-│
-├── arquivos/         → coloque aqui os arquivos de entrada (.xlsx ou .csv)
-├── saida/            → relatórios e dashboards gerados (organizados por data)
-│   └── 2026-03-31/
-│       ├── analise_contratacao.xlsx
-│       └── dashboard_mercado_de_trabalho.png
-├── logs/             → logs de execução do bot
-├── requirements.txt  → dependências do projeto
-└── .venv/            → ambiente virtual Python
-
 🚀 Como usar
 1. Clone o repositório
 bashgit clone https://github.com/May4n/bot-python-planilhas.git
