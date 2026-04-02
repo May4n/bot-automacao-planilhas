@@ -18,20 +18,40 @@ Registra logs de todas as execuções
 1. Clone o repositório
 bashgit clone https://github.com/May4n/bot-python-planilhas.git
 cd bot-python-planilhas
-2. Crie e ative o ambiente virtual
-bashpython -m venv .venv
+### 2. Crie e ative o ambiente virtual
+```bash
+python -m venv .venv
 source .venv/Scripts/activate   # Windows (Git Bash)
 source .venv/bin/activate        # Linux / macOS
-3. Instale as dependências
-bashpip install -r requirements.txt
-4. Adicione o arquivo de dados
-Coloque seu arquivo .xlsx ou .csv dentro da pasta arquivos/. O projeto usa o dataset Global AI Jobs disponível gratuitamente no Kaggle.
-5. Configure o nome do arquivo
-Abra o main.py e ajuste o nome do arquivo na linha:
-pythondf = ler_arquivo("seu_arquivo.xlsx")
-6. Execute o bot
-bashpython main.py
-O bot vai rodar imediatamente e depois aguardar o próximo horário agendado. Para encerrar, pressione CTRL+C no terminal.
+```
+
+### 3. Instale as dependências
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Adicione o arquivo de dados
+
+Coloque seu arquivo `.xlsx` ou `.csv` dentro da pasta `arquivos/`.
+O projeto foi desenvolvido com o dataset **Global AI Jobs**,
+disponível gratuitamente no [Kaggle](https://www.kaggle.com/datasets/bismasajjad/global-ai-job-market-and-salary-trends-2025).
+
+### 5. Execute o bot
+```bash
+# Uso básico — agendado para rodar todo dia às 08:00
+python main.py --arquivo nome_do_arquivo.xlsx
+
+# Personalizando o horário de execução
+python main.py --arquivo nome_do_arquivo.xlsx --horario 09:30
+```
+
+### 6. Verifique os resultados
+
+Os arquivos gerados são salvos automaticamente em:
+```
+saida/YYYY-MM-DD/
+    ├── analise_contratacao.xlsx   → relatório Excel formatado
+    └── dashboard_mercado_de_trabalho.png   → dashboard com 4 gráficos
 
     Configurações
 Para alterar o horário de execução automática, edite essa linha no main.py:
