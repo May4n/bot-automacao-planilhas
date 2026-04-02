@@ -15,17 +15,17 @@ from dashboard import gerar_dashboard
 from relatorio import gerar_relatorio # NO TOPO DO ARQUIVO
 from datetime import datetime
 import os
+import argparse
 
-def executar_bot():
+def executar_bot(name_file):
     logging.info("Bot INICIADO.")
     hora_atual = datetime.now().strftime('%H:%M:%S')
     print(f"[{hora_atual}] Executando bot")
     
     try:
         #Passo 1 e 2: leitura e limpeza
-        df = ler_arquivo("global_ai_jobs.xlsx")
+        df = ler_arquivo(name_file)
         df = limpar_dados(df)
-        print(df.columns.tolist())
         print(f"Arquivo lido com SUCESSO! {len(df)} linhas encontradas.")
         logging.info("Bot finalizado com sucesso.")
 
@@ -40,17 +40,7 @@ def executar_bot():
         porte = analisar_porte_empresa(df)
         print("PORTE COMPLETO:")
         print(porte)
-        print(f"Tipo da coluna: {porte['company_size'].dtype}")
         automacao = analisar_risco_automacao(df)
-
-        print("PAÍS:")
-        print(pais)
-        print("\nINDÚSTRIA:")
-        print(industria)
-        print("\nPORTE:")
-        print(porte)
-        print("\nAUTOMAÇÃO:")
-        print(automacao)
         
         #CRIA PASTA COM DATA DE HOJE
         data_hoje = datetime.now().strftime("%Y-%m-%d")
@@ -73,10 +63,35 @@ def executar_bot():
         logging.error(f"Erro na execucao: {e}")
         print(f"ERROR: {e}")
 
-schedule.every().day.at("08:00").do(executar_bot)
-print("Bot agendado. Aguardando proxima execucao...")
+#---------CONFIGURAÇAO DO ARGPARSE
+parser = argparse.ArgumentParser(
+    description="Bot de Automação de Planilhas" 
+)
 
-executar_bot()
+parser.add_argument(
+    "--arquivo",
+    type=str,
+    required=True,
+    help="NOme do arquivo de entrada (ex: global_ai_jobs.xlsx)"
+)
+
+parser.add_argument(
+    "--horario",
+    type=str,
+    default="08:00",
+    help="HOra´rio de execução diária no formato HH:HM (padrão: 08:00)"
+)
+
+args = parser.parse_args()
+
+#--------AGENDAODR
+schedule.every().day.at(args.horario).do(
+    lambda: executar_bot(args.arquivo)
+    )
+print(f"Bot agendado para rodar todos os dias às {args.horario}")
+print("Pressione CRTL+C para parar.\n")
+
+executar_bot(args.arquivo) #RODA UMA VEZ IMEDIATAMENTE
 
 while True:
     schedule.run_pending()

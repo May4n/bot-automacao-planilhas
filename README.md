@@ -1,7 +1,7 @@
 Bot de Automação de Planilhas — Análise de Mercado de IA
 Bot desenvolvido em Python que lê automaticamente uma planilha de vagas de emprego em IA, processa os dados, gera um relatório Excel formatado e um dashboard visual com gráficos de mercado — tudo organizado por data de execução.
 
-    O que o bot faz
+O que o bot faz
 
 Lê arquivos .xlsx ou .csv automaticamente
 Filtra dados por ano (2025 e 2026)
