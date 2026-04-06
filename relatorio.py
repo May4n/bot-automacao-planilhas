@@ -29,6 +29,23 @@ def ajustar_colunas(ws, colunas):
         largura = max(len(str(nome_coluna)), 15) + 4
         ws.column_dimensions[letra].width = largura
 
+def gerar_aba(wb, titulo, df, fill_cabecalho, fonte_cabecalho, fill_par, fill_impar, borda, primeira=False):
+    """
+    Cria uma aba no workbook com os dados formatados.
+
+    Parâmetros:
+        wb            — Workbook do openpyxl
+        titulo        — Nome da aba
+        df            — DataFrame com os dados
+        primeira      — True se for a primeira aba (usa wb.active)
+    """
+    ws = wb.active if primeira else wb.create_sheet(title=titulo)
+    ws.title = titulo
+    colunas = list(df.columns)
+    estilizar_cabecalho(ws, colunas, fill_cabecalho, fonte_cabecalho, borda)
+    estilizar_dados(ws, df, fill_par, fill_impar, borda)
+    ajustar_colunas(ws, colunas)
+
 def gerar_relatorio(custo, qualidade, especializacoes, nome_saida):
     """
     Gera um arquivo Excel com 3 abas formatadas.

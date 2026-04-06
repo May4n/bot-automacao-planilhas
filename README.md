@@ -1,45 +1,73 @@
 Bot de Automação de Planilhas — Análise de Mercado de IA
-Bot desenvolvido em Python que lê automaticamente uma planilha de vagas de emprego em IA, processa os dados, gera um relatório Excel formatado e um dashboard visual com gráficos de mercado — tudo organizado por data de execução.
+Bot desenvolvido em Python que lê automaticamente uma planilha de vagas de emprego em IA, processa os dados, gera um relatório Excel com 3 abas de análise e um dashboard visual com 4 gráficos de mercado — tudo organizado por data de execução e configurável via terminal.
 
 O que o bot faz
 
 Lê arquivos .xlsx ou .csv automaticamente
-Filtra dados por ano (2025 e 2026)
-Limpa e trata dados inconsistentes
-Analisa padrões de contratação por nível de experiência e modelo de trabalho
-Gera análises de mercado: vagas por país, indústria, porte de empresa e risco de automação
-Exporta um relatório .xlsx formatado com cabeçalho colorido e linhas alternadas
+
+Com base em dados reais de +25.000 vagas globais (2025/2026):
+
+Custo de contratação por nível de experiência — salário médio, bônus e taxa de aceitação de oferta
+Qualidade de vida por modelo de trabalho — horas semanais, férias e satisfação
+Especializações de IA — quais perfis pagam mais e têm maior crescimento de carreira
+Dashboard visual com 4 gráficos de mercado — países, indústrias, porte de empresa e risco de automação
+
+
+Exporta um relatório .xlsx formatado com 3 abas, cabeçalho colorido e linhas alternadas
 Gera um dashboard .png com 4 gráficos de pizza
 Organiza os arquivos de saída em pastas por data de execução
+Suporta modo --dry-run para visualizar os dados no terminal sem salvar arquivos
 Agenda execução automática diária no horário configurado
 Registra logs de todas as execuções
 
 🚀 Como usar
 1. Clone o repositório
-bashgit clone https://github.com/May4n/bot-python-planilhas.git
-cd bot-python-planilhas
+bashgit clone https://github.com/May4n/bot-automacao-planilhas.git
+cd bot-automacao-planilhas
+
 2. Crie e ative o ambiente virtual
 bashpython -m venv .venv
 source .venv/Scripts/activate   # Windows (Git Bash)
 source .venv/bin/activate        # Linux / macOS
+
 3. Instale as dependências
 bashpip install -r requirements.txt
-4. Adicione o arquivo de dados
-Coloque seu arquivo .xlsx ou .csv dentro da pasta arquivos/. O projeto usa o dataset Global AI Jobs disponível gratuitamente no Kaggle.
-5. Configure o nome do arquivo
-Abra o main.py e ajuste o nome do arquivo na linha:
-pythondf = ler_arquivo("seu_arquivo.xlsx")
-6. Execute o bot
-bashpython main.py
-O bot vai rodar imediatamente e depois aguardar o próximo horário agendado. Para encerrar, pressione CTRL+C no terminal.
 
-    Configurações
-Para alterar o horário de execução automática, edite essa linha no main.py:
-pythonschedule.every().day.at("08:00").do(executar_bot)
-Exemplos de agendamento:
-pythonschedule.every(10).minutes.do(executar_bot)   # a cada 10 minutos
-schedule.every().hour.do(executar_bot)         # a cada hora
-schedule.every().monday.at("09:00").do(executar_bot)  # toda segunda às 9h
+4. Adicione o arquivo de dados
+Coloque seu arquivo .xlsx ou .csv dentro da pasta arquivos/.
+O projeto foi desenvolvido com o dataset Global AI Jobs,
+disponível gratuitamente no Kaggle.
+
+5. Execute o bot
+bash
+# Modo diagnóstico — visualiza os dados no terminal sem salvar arquivos
+python main.py --arquivo nome_do_arquivo.xlsx --dry-run
+
+6. Verifique os resultados
+Os arquivos gerados são salvos automaticamente em:
+saida/ YYYY-MM-DD/
+                ├── analise_contratacao.xlsx           → relatório Excel com 3 abas
+                └── dashboard_mercado_de_trabalho.png  → dashboard com 4 gráficos
+Ajuda
+Para ver todos os comandos disponíveis:Configurações
+Para alterar o horário de execução automática:
+bash# Todo dia às 09:30
+python main.py --arquivo dados.xlsx --horario 09:30
+python main.py --help
+
+Configurações
+Para alterar o horário de execução:
+bash
+
+ Análises geradas
+Aba 1 — Custo de Contratação
+Salário médio, bônus médio e taxa de aceitação de oferta agrupados por nível de experiência (Entry, Mid, Senior, Lead).
+
+Aba 2 — Qualidade de Vida
+Horas semanais médias, dias de férias médios e satisfação média agrupados por modelo de trabalho (Remote, Hybrid, Onsite).
+
+Aba 3 — Especializações de IA
+Salário médio, score de crescimento de carreira e avaliação média de empresa agrupados por especialização (LLM, NLP, Computer Vision, MLOps, Generative AI, Analytics, Reinforcement Learning, Forecasting).
 
     Dependências
 pandas
@@ -66,7 +94,18 @@ openpyxl — geração de relatórios Excel formatados
 matplotlib — geração de gráficos e dashboard
 schedule — agendamento de execução automática
 logging — registro de logs de execução
+argparse — interface de linha de comando (CLI)
 
+Insights gerados com dados reais (2025/2026)
+Com base em +25.770 vagas de IA globais:
+
+Profissionais Lead têm salário médio de $142k — 37% acima de Entry ($61k).
+
+Remote, Hybrid e Onsite apresentam satisfação praticamente igual — o modelo de trabalho não impacta significativamente a felicidade do funcionário.
+
+Generative AI lidera o ranking de salários ($97k), seguida de perto por LLM ($97k) e Analytics ($97k).
+
+A taxa de aceitação de oferta é similar em todos os níveis (75%) — mercado competitivo independente da senioridade.
 
     Sobre o projeto
-Este projeto foi desenvolvido como portfólio para demonstrar habilidades em automação de dados com Python. O bot foi construído com arquitetura modular — cada arquivo tem uma responsabilidade única, seguindo boas práticas de desenvolvimento.
+Este projeto foi desenvolvido como portfólio para demonstrar habilidades em automação de dados com Python. O bot foi construído com arquitetura modular — cada arquivo tem uma responsabilidade única, seguindo boas práticas de desenvolvimento (PEP 8, DRY, early filter, docstrings).

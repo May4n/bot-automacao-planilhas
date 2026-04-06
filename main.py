@@ -23,7 +23,8 @@ pd.set_option('display.width', None)        # largura infinita
 pd.set_option('display.max_columns', None)  # mostra todas as colunas
 pd.set_option('display.float_format', '{:.2f}'.format)  # 2 casas decimais
 
-def executar_bot(name_file):
+
+def executar_bot(name_file, abas=["todas"]):
     logging.info("Bot INICIADO.")
     hora_atual = datetime.now().strftime('%H:%M:%S')
     print(f"[{hora_atual}] Executando bot")
@@ -105,30 +106,22 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--horario",
-    type=str,
-    default="08:00",
-    help="Horário de execução diária no formato HH:HM (padrão: 08:00)"
-)
-
-parser.add_argument(
     "--dry-run",
     action="store_true",  # não precisa de valor, só a flag basta
     default=False,
     help="Roda o bot sem salvar arquivos — só exibe resultados no terminal"
 )
 
+parser.add_argument(
+    "--abas",
+    nargs="+",  # aceita um ou mais valores
+    choices=["custo", "qualidade", "especializacoes", "todas"],
+    default=["todas"],
+    help="Quais abas gerar: custo, qualidade, especializacoes, ou todas"
+)
+
 args = parser.parse_args()
-
-#--------AGENDAODR
-schedule.every().day.at(args.horario).do(
-    lambda: executar_bot(args.arquivo)
-    )
-print(f"Bot agendado para rodar todos os dias às {args.horario}")
-print("Pressione CRTL+C para parar.\n")
-
-executar_bot(args.arquivo) #RODA UMA VEZ IMEDIATAMENTE
-
-while True:
-    schedule.run_pending()
-    time.sleep(1.5)
+try:
+    executar_bot(args.arquivo,args.abas) #RODA UMA VEZ IMEDIATAMENTE
+except KeyboardInterrupt:
+    print("\nBot encerrado pelo usuário.")
