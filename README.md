@@ -73,7 +73,8 @@ openpyxl
 matplotlib
 schedule
 
-    Exemplo de saída
+Exemplo de saída
+
 O bot gera automaticamente dois arquivos na pasta saida/YYYY-MM-DD/:
 Relatório Excel — tabela formatada com análise de contratação por nível de experiência e modelo de trabalho, com cabeçalho azul escuro e linhas alternadas.
 Dashboard — imagem .png com 4 gráficos de pizza mostrando:
@@ -84,7 +85,7 @@ Vagas por porte de empresa
 Distribuição por risco de automação
 
 
-    Tecnologias utilizadas
+Tecnologias utilizadas
 
 Python 3.x
 pandas — leitura, limpeza e análise de dados
@@ -105,5 +106,6 @@ Generative AI lidera o ranking de salários ($97k), seguida de perto por LLM ($9
 
 A taxa de aceitação de oferta é similar em todos os níveis (75%) — mercado competitivo independente da senioridade.
 
-    Sobre o projeto
+Sobre o projeto
+
 Este projeto foi desenvolvido como portfólio para demonstrar habilidades em automação de dados com Python. O bot foi construído com arquitetura modular — cada arquivo tem uma responsabilidade única, seguindo boas práticas de desenvolvimento (PEP 8, DRY, early filter, docstrings).
