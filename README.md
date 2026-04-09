@@ -38,7 +38,7 @@ O projeto foi desenvolvido com o dataset Global AI Jobs,
 disponível gratuitamente no Kaggle.
 
 5. Execute o bot
-bash
+
 # Modo diagnóstico — visualiza os dados no terminal sem salvar arquivos
 python main.py --arquivo nome_do_arquivo.xlsx --dry-run
 
@@ -48,17 +48,15 @@ saida/ YYYY-MM-DD/
                 ├── analise_contratacao.xlsx           → relatório Excel com 3 abas
                 └── dashboard_mercado_de_trabalho.png  → dashboard com 4 gráficos
 Ajuda
+
 Para ver todos os comandos disponíveis:Configurações
 Para alterar o horário de execução automática:
 bash# Todo dia às 09:30
 python main.py --arquivo dados.xlsx --horario 09:30
 python main.py --help
 
-Configurações
-Para alterar o horário de execução:
-bash
+Análises geradas
 
- Análises geradas
 Aba 1 — Custo de Contratação
 Salário médio, bônus médio e taxa de aceitação de oferta agrupados por nível de experiência (Entry, Mid, Senior, Lead).
 
@@ -68,7 +66,8 @@ Horas semanais médias, dias de férias médios e satisfação média agrupados 
 Aba 3 — Especializações de IA
 Salário médio, score de crescimento de carreira e avaliação média de empresa agrupados por especialização (LLM, NLP, Computer Vision, MLOps, Generative AI, Analytics, Reinforcement Learning, Forecasting).
 
-    Dependências
+Dependências
+
 pandas
 openpyxl
 matplotlib
