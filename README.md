@@ -17,7 +17,6 @@ Exporta um relatório .xlsx formatado com 3 abas, cabeçalho colorido e linhas a
 Gera um dashboard .png com 4 gráficos de pizza
 Organiza os arquivos de saída em pastas por data de execução
 Suporta modo --dry-run para visualizar os dados no terminal sem salvar arquivos
-Agenda execução automática diária no horário configurado
 Registra logs de todas as execuções
 
 🚀 Como usar
